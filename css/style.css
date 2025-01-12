@@ -1019,10 +1019,6 @@ footer {
   background-color: #333;
 }
 
-.social-icon li a.fa-whatsapp {
-  background-color: #25D366;
-}
-
 .social-icon li a.fa-envelope:hover {
   background-color: #d10d0d;
 }
@@ -1037,10 +1033,6 @@ footer {
 
 .social-icon li a.fa-github:hover {
   background-color: #2d2d2d;
-}
-
-.social-icon li a.fa-whatsapp:hover {
-  background-color: #128C7E;
 }
 
 .social-icon li a:hover {
