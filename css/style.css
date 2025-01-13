@@ -150,11 +150,6 @@ footer {
   text-align: center;
 }
 
-#experience,
-#education {
-  background: #E9724C;
-}
-
 .background-image {
   background-position: 50% 50% !important;
   background-size: cover !important;
@@ -173,19 +168,27 @@ footer {
 }
 
 .color-yellow {
-  color: #E3AE57;
+  color: #deb04c;
 }
 
 .bg-yellow {
-  background: #E3AE57;
+  background: #deb04c;
 }
 
 .bg-green {
-  background: #12731f;
+  background: #0c7f51;
 }
 
 .bg-dark {
   background: #161616;
+}
+
+.bg-blue {
+  background: #5836be;
+}
+
+.bg-red {
+  background: #ca1f58;
 }
 
 
@@ -492,6 +495,10 @@ a:focus {
     Experience section              
 -----------------------------------------*/
 
+#experience {
+  background: #E9724C;
+}
+
 #experience .experience-img {
   background: url('../images/experience-img.jpg') no-repeat;
 }
@@ -661,7 +668,7 @@ a:focus {
 
 #blog {
   background: #23ae6b;
-  padding: 80px 0;
+  padding-top: 40px;
 }
 
 #blog .blog-thumb {
@@ -673,6 +680,10 @@ a:focus {
   margin-right: 42px;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 #blog .blogs-thumb {
@@ -819,6 +830,7 @@ a:focus {
   cursor: pointer;
   position: relative;
   z-index: 1;
+  margin-bottom: 20px;
 }
 
 #load-more-btn:hover {
