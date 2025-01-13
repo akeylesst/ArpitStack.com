@@ -628,7 +628,7 @@ a:focus {
 
 @media only screen and (max-width: 480px) {
   #project .projects-content {
-    height: 55px;
+    height: 80px;
   }
 
   #project .projects-thumb {
