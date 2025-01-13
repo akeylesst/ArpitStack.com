@@ -93,7 +93,7 @@ $(document).ready(function () {
   let blogsCache = [];
 
   function fetchBlogs() {
-    fetch("https://dev.to/api/articles?username=madza")
+    fetch("https://dev.to/api/articles?username=arpitstack")
       .then(response => response.json())
       .then(blogs => {
         blogsCache = blogs;
