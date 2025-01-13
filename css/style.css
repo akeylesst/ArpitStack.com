@@ -694,7 +694,6 @@ a:focus {
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -745,7 +744,7 @@ a:focus {
 }
 
 #blog .section-title {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
