@@ -409,7 +409,7 @@ a:focus {
 -----------------------------------------*/
 
 #about .about-img {
-  background: url('../images/about-img.jpg') no-repeat;
+  background: url('../images/about-img.png') no-repeat;
 }
 
 #about .about-thumb,
@@ -500,7 +500,7 @@ a:focus {
 }
 
 #experience .experience-img {
-  background: url('../images/experience-img.jpg') no-repeat;
+  background: url('../images/experience-img.png') no-repeat;
 }
 
 #experience .media-heading {
@@ -526,7 +526,7 @@ a:focus {
 }
 
 #education .education-img {
-  background: url('../images/education-img.jpg') no-repeat;
+  background: url('../images/education-img.png') no-repeat;
 }
 
 #education .media-heading {
@@ -646,7 +646,7 @@ a:focus {
 -----------------------------------------*/
 
 #quotes {
-  background: url('../images/quotes-bg-img.jpg') 50% 0 repeat-y fixed;
+  background: url('../images/quotes-bg-img.png') 50% 0 repeat-y fixed;
   background-size: cover;
   background-position: center center;
   color: #ffffff;
@@ -881,7 +881,7 @@ a:focus {
 }
 
 #contact .contact-img {
-  background: url('../images/contact-img.jpg') no-repeat;
+  background: url('../images/contact-img.png') no-repeat;
   min-height: 75vh;
 }
 
@@ -1003,7 +1003,7 @@ a:focus {
 -----------------------------------------*/
 
 footer {
-  padding: 140px 0px;
+  padding: 100px 0px;
 }
 
 
