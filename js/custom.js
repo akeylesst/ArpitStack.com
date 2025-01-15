@@ -6,12 +6,10 @@ $(window).load(function () {
   $('.preloader').fadeOut(1000); // set duration in brackets    
 });
 
-
 /* HTML document is loaded. DOM is ready. 
 -------------------------------------------*/
 
 $(document).ready(function () {
-
 
   /*-------------------------------------------------------------------------------
     Navigation - Hide mobile menu after clicking on a link
@@ -20,7 +18,6 @@ $(document).ready(function () {
   $('.navbar-collapse a').click(function () {
     $(".navbar-collapse").collapse('hide');
   });
-
 
   /*-------------------------------------------------------------------------------
     jQuery Parallax
@@ -36,10 +33,8 @@ $(document).ready(function () {
     $('#blog').parallax("100%", 0.1);
     $('#contact').parallax("100%", 0.1);
     $('footer').parallax("100%", 0.2);
-
   }
   initParallax();
-
 
   /*-------------------------------------------------------------------------------
     smoothScroll js
@@ -47,10 +42,12 @@ $(document).ready(function () {
 
   $(function () {
     $('.custom-navbar a, #home a').bind('click', function (event) {
-      var $anchor = $(this);
-      $('html, body').stop().animate({
-        scrollTop: $($anchor.attr('href')).offset().top - 49
-      }, 1000);
+      var target = $($(this).attr('href'));
+      if (target.length) {
+        $('html, body').stop().animate({
+          scrollTop: target.offset().top - 49
+        }, 1000);
+      }
       event.preventDefault();
     });
   });
@@ -63,7 +60,7 @@ $(document).ready(function () {
 
   /*-------------------------------------------------------------------------------
       Typed.js - Animation for typing text
-    -------------------------------------------------------------------------------*/
+  -------------------------------------------------------------------------------*/
 
   // Delay the typing effect to start after fadeInUp animation
   setTimeout(function () {
@@ -77,7 +74,7 @@ $(document).ready(function () {
 
   /*-------------------------------------------------------------------------------
     Fetch and display blogs with "Load More" functionality
-    -------------------------------------------------------------------------------*/
+  -------------------------------------------------------------------------------*/
 
   const blogContainer = document.getElementById("blog-container");
   const loadMoreBtn = document.getElementById("load-more-btn");
@@ -133,5 +130,28 @@ $(document).ready(function () {
 
   // Initially load the blogs when the page loads
   fetchBlogs();
+
+  /*-------------------------------------------------------------------------------
+    Toggle Night Mode functionality
+  -------------------------------------------------------------------------------*/
+
+  const nightModeToggles = document.querySelectorAll('.navbar-night-mode, .night-mode-toggle');
+
+  nightModeToggles.forEach(toggle => {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.body.classList.toggle('dark-theme');
+
+      // Toggle icon
+      const icons = document.querySelectorAll('.fa-moon-o, .fa-sun-o');
+      icons.forEach(icon => {
+        if (icon.classList.contains('fa-moon-o')) {
+          icon.classList.replace('fa-moon-o', 'fa-sun-o');
+        } else {
+          icon.classList.replace('fa-sun-o', 'fa-moon-o');
+        }
+      });
+    });
+  });
 
 });

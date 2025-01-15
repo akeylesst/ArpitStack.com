@@ -364,7 +364,6 @@ a:focus {
 }
 
 #home .col-md-6 {
-  background: #f1e2d7;
   padding-right: 0;
   padding-left: 0;
 }
@@ -390,6 +389,7 @@ a:focus {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  background: #f1e2d7;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -1160,4 +1160,88 @@ footer {
   footer {
     padding: 40px 0;
   }
+}
+
+/*---------------------------------------
+   Night Mode theme              
+-----------------------------------------*/
+
+.navbar-toggle-wrapper {
+  align-items: center;
+}
+
+.navbar-night-mode {
+  background: transparent;
+  border: none;
+  padding: 14px 10px;
+  float: right;
+  position: relative;
+  margin-right: 5px;
+  color: #E3AE57;
+  transition: all 0.3s ease;
+}
+
+.night-mode-desktop .night-mode-toggle {
+  padding: 15px 15px;
+}
+
+.night-mode-desktop .night-mode-toggle i {
+  font-size: 15px;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+body.dark-theme .custom-navbar {
+  background-color: #2d2d2d;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .custom-navbar .nav li a {
+  color: #ffffff;
+}
+
+body.dark-theme .custom-navbar .nav li a:hover {
+  color: #E3AE57;
+}
+
+body.dark-theme .section-btn {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+body.dark-theme #about,
+body.dark-theme #experience,
+body.dark-theme #education,
+body.dark-theme #project,
+body.dark-theme #blog,
+body.dark-theme #contact {
+  background-color: #2d2d2d;
+}
+
+body.dark-theme p {
+  color: #e0e0e0;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+
+
+  .navbar-night-mode i {
+    font-size: 20px;
+  }
+}
+
+/* Animation for theme transition */
+body,
+#about,
+#experience,
+#education,
+#project,
+#blog,
+#contact {
+  transition: all 0.3s ease-in-out;
 }
