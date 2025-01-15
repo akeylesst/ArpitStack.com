@@ -81,14 +81,17 @@ $(document).ready(function () {
 
   let currentPage = 1;
   const blogsPerPage = 3;
-  let blogsCache = [];
 
-  function fetchBlogs() {
-    fetch("https://dev.to/api/articles?username=arpitstack")
+  function fetchBlogs(page) {
+    fetch(`https://dev.to/api/articles?username=arpitstack&per_page=${blogsPerPage}&page=${page}`)
       .then(response => response.json())
       .then(blogs => {
-        blogsCache = blogs;
-        loadBlogs();
+        if (blogs.length > 0) {
+          displayBlogs(blogs);
+          currentPage++;
+        } else {
+          loadMoreBtn.style.display = "none";
+        }
       })
       .catch(error => {
         console.error("Error fetching blogs:", error);
@@ -96,40 +99,31 @@ $(document).ready(function () {
       });
   }
 
-  function loadBlogs() {
-    const start = (currentPage - 1) * blogsPerPage;
-    const end = currentPage * blogsPerPage;
-    const blogsToDisplay = blogsCache.slice(start, end);
+  function displayBlogs(blogs) {
+    blogs.forEach(blog => {
+      const blogCard = document.createElement('div');
+      blogCard.classList.add('col-md-4', 'col-sm-6');
 
-    if (blogsToDisplay.length > 0) {
-      blogsToDisplay.forEach(blog => {
-        const blogCard = document.createElement('div');
-        blogCard.classList.add('col-md-4', 'col-sm-6');
-
-        blogCard.innerHTML = `
-            <div class="wow fadeInUp" data-wow-delay="0.3s">
-              <div class="blogs-thumb">
-                <img src="${blog.cover_image || 'images/default_blog_img.png'}" alt="Blog title: ${blog.title}" class="blog-card-img">
-                <h3 class="blog-title">${blog.title}</h3>
-                <p class="blog-excerpt">${blog.description || blog.body.slice(0, 100)}...</p>
-                <div class="btn-blog-wrapper">
-                  <a href="${blog.url}" class="btn-blog" target="_blank">Read More</a>
-                </div>
-              </div>
+      blogCard.innerHTML = `
+        <div class="wow fadeInUp" data-wow-delay="0.3s">
+          <div class="blogs-thumb">
+            <img src="${blog.cover_image || 'images/default_blog_img.png'}" alt="Blog title: ${blog.title}" class="blog-card-img">
+            <h3 class="blog-title">${blog.title}</h3>
+            <p class="blog-excerpt">${blog.description || blog.body.slice(0, 100)}...</p>
+            <div class="btn-blog-wrapper">
+              <a href="${blog.url}" class="btn-blog" target="_blank">Read More</a>
             </div>
-          `;
-        blogContainer.appendChild(blogCard);
-      });
-      currentPage++;
-    } else {
-      loadMoreBtn.style.display = "none";
-    }
+          </div>
+        </div>
+      `;
+      blogContainer.appendChild(blogCard);
+    });
   }
+  loadMoreBtn.addEventListener("click", () => {
+    fetchBlogs(currentPage);
+  });
 
-  loadMoreBtn.addEventListener("click", loadBlogs);
-
-  // Initially load the blogs when the page loads
-  fetchBlogs();
+  fetchBlogs(currentPage);
 
   /*-------------------------------------------------------------------------------
     Toggle Night Mode functionality
