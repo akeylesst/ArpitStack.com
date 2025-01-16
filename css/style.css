@@ -882,20 +882,9 @@ a:focus {
   background: #E9724C;
 }
 
-#contact .contact-form,
 #contact .contact-thumb {
   padding: 22px 32px 22px 32px;
   min-height: 75vh;
-}
-
-#contact .contact-img {
-  background: url('../images/contact-img.png') no-repeat;
-  min-height: 75vh;
-}
-
-#contact .sponsor-me {
-  padding-top: 6px;
-  padding-bottom: 6px;
 }
 
 #contact .form-control::-moz-placeholder {
@@ -950,9 +939,15 @@ a:focus {
   padding-right: 10px;
 }
 
-#contact .btn-sponsor-wrapper {
-  margin-top: 20px;
-  text-align: center;
+#contact .sponsor-thumb {
+  padding: 22px 32px 22px 32px;
+  min-height: 75vh;
+}
+
+#contact .sponsor-me {
+  padding-top: 21px;
+  padding-bottom: 21px;
+  margin: 21px;
 }
 
 .btn-sponsor {
@@ -975,9 +970,12 @@ a:focus {
 
 /* Mobile Responsiveness */
 @media only screen and (max-width: 768px) {
+  #contact .contact-thumb {
+    padding: 35px 15px;
+  }
+
   #contact .sponsor-thumb {
-    margin-bottom: 20px;
-    padding: 40px 15px;
+    padding: 15px 15px;
   }
 
   .btn-sponsor {
@@ -996,13 +994,17 @@ a:focus {
 }
 
 @media only screen and (max-width: 480px) {
+  #contact .contact-thumb {
+    padding: 30px 25px;
+  }
+
   #contact .sponsor-thumb {
-    padding: 30px 10px;
+    padding: 10px 10px;
   }
 
   .btn-sponsor {
     font-size: 12px;
-    padding: 6px 12px;
+    padding: 8px 15px;
   }
 }
 

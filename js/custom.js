@@ -107,7 +107,7 @@ $(document).ready(function () {
       blogCard.innerHTML = `
         <div class="wow fadeInUp" data-wow-delay="0.3s">
           <div class="blogs-thumb">
-            <img src="${blog.cover_image || 'images/default_blog_img.png'}" alt="Blog title: ${blog.title}" class="blog-card-img">
+            <img src="${blog.cover_image || 'images/default-blog-img.png'}" alt="Blog title: ${blog.title}" class="blog-card-img">
             <h3 class="blog-title">${blog.title}</h3>
             <p class="blog-excerpt">${blog.description || blog.body.slice(0, 100)}...</p>
             <div class="btn-blog-wrapper">
