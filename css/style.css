@@ -530,11 +530,12 @@ a:focus {
 -----------------------------------------*/
 
 #education {
-  background: #deb04c;
+  background: #d34763;
 }
 
 #education .education-img {
   background: url('../images/education-img.png') no-repeat;
+  opacity: 0.7;
 }
 
 #education .media-heading {
