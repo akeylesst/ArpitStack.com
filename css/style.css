@@ -584,36 +584,42 @@ a:focus {
 
 .timeline-content {
   padding: 25px 30px;
-  background: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, #ffffff, #fdd4b4);
   position: relative;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  border: 5px solid #ff7f50;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease;
 }
 
 .timeline-content:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 30px rgba(156, 137, 137, 0.2), 0 0 10px rgba(255, 147, 97, 0.618);
 }
 
 .timeline-content h3 {
-  color: #333;
+  color: #453333;
   margin-bottom: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .timeline-content .role {
-  color: #3f178b;
-  font-size: 1.25em;
+  color: #106e81;
+  font-size: 1.3em;
   margin-bottom: 15px;
-  font-weight: 500;
+  font-weight: 650;
 }
 
 .timeline-content .duration {
   color: #666;
-  font-size: 0.95em;
+  font-size: 1em;
   margin-bottom: 15px;
   font-style: italic;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* Enhanced icon styling */
