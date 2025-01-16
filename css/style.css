@@ -624,13 +624,13 @@ a:focus {
   right: -70px;
   top: 50%;
   transform: translateY(-50%);
-  background: #E3AE57;
+  background: linear-gradient(135deg, #ff7f50, #ff6f61);
   border-radius: 50%;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px rgba(227, 174, 87, 0.4);
+  box-shadow: 0 0 15px rgba(255, 111, 97, 0.4);
   transition: all 0.3s ease;
 }
 
@@ -645,12 +645,13 @@ a:focus {
 }
 
 .timeline-icon:hover {
-  background: #fff;
-  transform: translateY(-50%) scale(1.1);
+  background: linear-gradient(135deg, #ff6f61, #ff7f50);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 0 20px rgba(255, 111, 97, 0.6);
 }
 
 .timeline-icon:hover i {
-  color: #E3AE57;
+  color: #ffffff;
   transform: rotate(360deg);
 }
 
