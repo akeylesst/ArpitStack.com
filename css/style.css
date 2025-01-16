@@ -507,6 +507,16 @@ a:focus {
   text-align: center;
 }
 
+#experience .section-title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#experience .experience-thumb {
+  padding: 32px 22px 32px 22px;
+}
+
 #experience::before {
   content: '';
   position: absolute;
@@ -514,18 +524,12 @@ a:focus {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('../images/experience-img.png') no-repeat center center;
-  background-size: cover;
+  background: url('../images/exp-bg-img.png') no-repeat center center;
+  background-size: auto 100%;
   filter: blur(5px);
   z-index: 0;
-  opacity: 0.4;
+  opacity: 0.9;
   transform: scale(1.1);
-}
-
-.experience-container {
-  position: relative;
-  z-index: 1;
-  padding: 50px 0;
 }
 
 .timeline {
@@ -599,8 +603,8 @@ a:focus {
 }
 
 .timeline-content .role {
-  color: #E3AE57;
-  font-size: 1.15em;
+  color: #3f178b;
+  font-size: 1.25em;
   margin-bottom: 15px;
   font-weight: 500;
 }
