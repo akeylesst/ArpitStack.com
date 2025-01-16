@@ -848,10 +848,26 @@ a:focus {
   font-size: 42px;
   margin-top: 32px;
   margin-bottom: 22px;
+  animation: rotateIcon3D 5s infinite linear;
+  transform-style: preserve-3d;
 }
 
 #quotes p {
   padding-top: 32px;
+}
+
+@keyframes rotateIcon3D {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 
