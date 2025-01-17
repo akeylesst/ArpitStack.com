@@ -501,6 +501,7 @@ a:focus {
 /*---------------------------------------
     Experience section              
 -----------------------------------------*/
+
 #experience {
   position: relative;
   overflow: hidden;
@@ -519,15 +520,15 @@ a:focus {
 
 #experience::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: url('../images/exp-bg-img.png') no-repeat center center;
-  background-size: auto 100%;
+  background-size: cover;
   filter: blur(5px);
-  z-index: 0;
+  z-index: -1;
   opacity: 0.9;
   transform: scale(1.1);
 }
@@ -539,7 +540,6 @@ a:focus {
   padding: 40px 0;
 }
 
-/* Main vertical line */
 .timeline::after {
   content: '';
   position: absolute;
@@ -558,7 +558,6 @@ a:focus {
   box-sizing: border-box;
 }
 
-/* Connecting lines to icons */
 .timeline-item::before {
   content: '';
   position: absolute;
@@ -584,17 +583,19 @@ a:focus {
 
 .timeline-content {
   padding: 25px 30px;
-  background: linear-gradient(135deg, #ffffff, #fdd4b4);
+  background: linear-gradient(135deg, rgb(255, 255, 255), rgba(253, 212, 180, 0.701));
+  -webkit-backdrop-filter: blur(12px);
   position: relative;
   border-radius: 25px;
   border: 5px solid #ff7f50;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
 }
 
 .timeline-content:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 20px 30px rgba(156, 137, 137, 0.2), 0 0 10px rgba(255, 147, 97, 0.618);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(253, 212, 180, 0.7));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .timeline-content h3 {
@@ -622,7 +623,6 @@ a:focus {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-/* Enhanced icon styling */
 .timeline-icon {
   position: absolute;
   width: 60px;
@@ -661,7 +661,6 @@ a:focus {
   transform: rotate(360deg);
 }
 
-/* Responsive Design */
 @media screen and (max-width: 768px) {
   .timeline::after {
     left: 31px;
@@ -702,26 +701,145 @@ a:focus {
 -----------------------------------------*/
 
 #education {
-  background: #d34763;
+  position: relative;
+  padding: 100px 0;
+  color: white;
+  overflow: hidden;
+  isolation: isolate;
+  /* Creates a new stacking context */
 }
 
-#education .education-img {
-  background: url('../images/education-img.png') no-repeat;
-  opacity: 0.7;
+.education-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  z-index: -1;
+  transform: translateZ(0);
+  /* Forces GPU acceleration */
+  will-change: transform;
+  /* Optimizes animations */
 }
 
-#education .media-heading {
-  margin-bottom: 0px;
+.education-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
 }
 
-#education .media .fa {
-  font-size: 42px;
-  margin-right: 14px;
+.education-header h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: white;
 }
 
-#education small {
-  color: #886D1E;
-  font-weight: bold;
+.education-header p {
+  font-size: 1.2em;
+  max-width: 800px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  position: relative;
+}
+
+.education-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.education-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.education-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+  pointer-events: none;
+}
+
+.education-icon {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: #ffd374;
+  text-align: center;
+}
+
+.education-content {
+  text-align: center;
+}
+
+.education-content h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.education-year {
+  display: inline-block;
+  background: rgba(253, 187, 45, 0.2);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.education-content p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  #education {
+    padding: 60px 0;
+  }
+
+  .education-header h1 {
+    font-size: 2.5em;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .education-box {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-header h1 {
+    font-size: 2em;
+  }
+
+  .education-header p {
+    font-size: 1em;
+  }
+
+  .education-content h3 {
+    font-size: 1.3em;
+  }
 }
 
 /*---------------------------------------
