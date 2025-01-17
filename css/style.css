@@ -417,18 +417,21 @@ a:focus {
   flex-direction: column;
 }
 
-#about .about-thumb {
-  padding: 22px 32px 32px 50px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+#about h1 {
+  font-size: 34px;
 }
 
-#about .skill-thumb {
-  padding: 22px 32px 32px 32px;
+#about .about-thumb,
+#about .skill-thumb,
+.recommendations-thumb {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 22px 32px 32px;
+}
+
+#about .about-thumb {
+  padding-left: 50px;
 }
 
 #about .skills-thumb {
@@ -436,9 +439,15 @@ a:focus {
   flex-grow: 1;
 }
 
-#about .btn-resume-wrapper {
-  margin-top: 20px;
-  text-align: center;
+#about .progress {
+  background: #ffffff;
+  border-radius: 0;
+  box-shadow: none;
+  height: 2px;
+}
+
+#about .progress-bar-primary {
+  background: #232B2B;
 }
 
 .btn-resume {
@@ -456,18 +465,11 @@ a:focus {
 .btn-resume:hover {
   background: #E9724C;
   color: #ffffff;
-  border-color: #E9724C;
 }
 
-#about .progress {
-  background: #ffffff;
-  border-radius: 0px;
-  box-shadow: none;
-  height: 2px;
-}
-
-#about .progress-bar-primary {
-  background: #232B2B;
+.btn-resume-wrapper {
+  margin-top: 20px;
+  text-align: center;
 }
 
 #about strong,
@@ -475,13 +477,6 @@ a:focus {
   font-weight: bold;
   display: inline-block;
   padding-bottom: 8px;
-}
-
-.recommendations-thumb {
-  padding: 22px 32px 23px 32px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .recommendations-wrapper {
@@ -527,11 +522,6 @@ a:focus {
   font-weight: normal;
 }
 
-h1 {
-  font-size: 32px;
-}
-
-/* Maintain responsiveness */
 @media only screen and (max-width: 991px) {
   #about .row {
     flex-direction: column;
@@ -545,7 +535,10 @@ h1 {
 }
 
 @media only screen and (max-width: 768px) {
-  #about .about-thumb {
+
+  #about .about-thumb,
+  #about .skill-thumb,
+  .recommendations-thumb {
     padding: 40px 15px;
   }
 
@@ -562,10 +555,6 @@ h1 {
     font-size: 13px;
   }
 
-  h1 {
-    font-size: 32px;
-  }
-
   p {
     font-size: 14px;
     line-height: 24px;
@@ -573,7 +562,10 @@ h1 {
 }
 
 @media only screen and (max-width: 480px) {
-  #about .about-thumb {
+
+  #about .about-thumb,
+  #about .skill-thumb,
+  .recommendations-thumb {
     padding: 30px 10px;
   }
 
