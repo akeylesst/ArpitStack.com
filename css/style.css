@@ -1278,37 +1278,36 @@ a:focus {
 
 #contact {
   background: #E9724C;
-}
-
-#contact .contact-thumb {
-  padding: 22px 32px 22px 32px;
-  min-height: 75vh;
-}
-
-#contact .form-control::-moz-placeholder {
   color: #ffffff;
-  opacity: 1
 }
 
-#contact .form-control:-ms-input-placeholder {
-  color: #ffffff
-}
-
-#contact .form-control::-webkit-input-placeholder {
-  color: #ffffff
+#contact .contact-thumb,
+#contact .sponsor-thumb {
+  padding: 22px 32px;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #contact .form-control {
   background: transparent;
   border: none;
   border-bottom: 1px solid #E3AE57;
-  border-radius: 0px;
+  border-radius: 0;
   box-shadow: none;
-  color: #ffffff;
+  color: #ffffff !important;
   font-size: 18px;
-  margin-top: 10px;
-  margin-bottom: 25px;
+  margin: 10px 0 25px;
   transition: all 0.4s ease-in-out;
+}
+
+#contact .form-control::-webkit-placeholder,
+#contact .form-control::-moz-placeholder,
+#contact .form-control:-ms-input-placeholder,
+#contact .form-control::placeholder {
+  color: #ffffff;
+  opacity: 1;
 }
 
 #contact .form-control:focus {
@@ -1333,19 +1332,9 @@ a:focus {
   color: #ffffff;
 }
 
-#contact .fa {
-  padding-right: 10px;
-}
-
-#contact .sponsor-thumb {
-  padding: 22px 32px 22px 32px;
-  min-height: 75vh;
-}
-
-#contact .sponsor-me {
-  padding-top: 21px;
-  padding-bottom: 21px;
-  margin: 21px;
+.sponsor-me {
+  padding: 21px 0;
+  margin: 21px 0;
 }
 
 .btn-sponsor {
@@ -1358,46 +1347,33 @@ a:focus {
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
   margin-top: 15px;
+  display: inline-block;
 }
 
 .btn-sponsor:hover {
   background: #ffffff;
   color: #E9724C;
-  border-color: #E9724C;
 }
 
-/* Mobile Responsiveness */
 @media only screen and (max-width: 768px) {
-  #contact .contact-thumb {
-    padding: 35px 15px;
-  }
 
+  #contact .contact-thumb,
   #contact .sponsor-thumb {
-    padding: 15px 15px;
+    padding: 35px 15px;
+    min-height: auto;
   }
 
   .btn-sponsor {
     padding: 8px 16px;
     font-size: 13px;
   }
-
-  h1 {
-    font-size: 32px;
-  }
-
-  p {
-    font-size: 14px;
-    line-height: 24px;
-  }
 }
 
 @media only screen and (max-width: 480px) {
-  #contact .contact-thumb {
-    padding: 30px 25px;
-  }
 
+  #contact .contact-thumb,
   #contact .sponsor-thumb {
-    padding: 10px 10px;
+    padding: 30px 25px;
   }
 
   .btn-sponsor {
