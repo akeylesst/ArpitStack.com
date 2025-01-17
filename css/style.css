@@ -149,19 +149,6 @@ footer {
   text-align: center;
 }
 
-.background-image {
-  background-position: 50% 50% !important;
-  background-size: cover !important;
-  width: 100%;
-  height: 100%;
-  min-height: 75vh;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
 .color-white {
   color: #ffffff;
 }
@@ -190,6 +177,9 @@ footer {
   background: #ca1f58;
 }
 
+.bg-white {
+  background: #f6f5f3;
+}
 
 
 /*---------------------------------------
@@ -415,35 +405,16 @@ a:focus {
    About section              
 -----------------------------------------*/
 
-#about {
-  background-color: #fff;
+#about .about-thumb {
+  padding: 22px 32px 32px 50px;
 }
 
-#about .about-img {
-  background: url('../images/about-img.png') no-repeat;
-}
-
-#about .about-thumb,
 #about .skill-thumb {
   padding: 22px 32px 32px 32px;
 }
 
-#about .progress {
-  background: #ffffff;
-  border-radius: 0px;
-  box-shadow: none;
-  height: 2px;
-}
-
-#about .progress-bar-primary {
-  background: #232B2B;
-}
-
-#about strong,
-#about span {
-  font-weight: bold;
-  display: inline-block;
-  padding-bottom: 8px;
+#about .skills-thumb {
+  margin-bottom: 20px;
 }
 
 #about .btn-resume-wrapper {
@@ -469,7 +440,70 @@ a:focus {
   border-color: #E9724C;
 }
 
-/* Mobile Responsiveness */
+#about .progress {
+  background: #ffffff;
+  border-radius: 0px;
+  box-shadow: none;
+  height: 2px;
+}
+
+#about .progress-bar-primary {
+  background: #232B2B;
+}
+
+#about strong,
+#about span {
+  font-weight: bold;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.recommendations-thumb {
+  padding: 22px 32px 23px 32px;
+
+}
+
+.recommendation-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recommendation-item:last-child {
+  margin-bottom: 0;
+}
+
+.recommendation-text {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.recommender-info {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 10px;
+}
+
+.recommender-info strong {
+  color: #ffffff;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.recommender-info span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 32px;
+}
+
 @media only screen and (max-width: 768px) {
   #about .about-thumb {
     padding: 40px 15px;
@@ -477,6 +511,14 @@ a:focus {
 
   .btn-resume {
     padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .recommendation-item {
+    padding: 12px;
+  }
+
+  .recommendation-text {
     font-size: 13px;
   }
 
@@ -1471,11 +1513,6 @@ footer {
   #contact .col-md-3 {
     padding: 0;
     margin: 0;
-  }
-
-  .background-image {
-    position: relative;
-    min-height: 65vh;
   }
 }
 
