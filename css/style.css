@@ -1296,18 +1296,23 @@ a:focus {
   border-bottom: 1px solid #E3AE57;
   border-radius: 0;
   box-shadow: none;
-  color: #ffffff !important;
+  color: #330404;
   font-size: 18px;
   margin: 10px 0 25px;
   transition: all 0.4s ease-in-out;
 }
 
-#contact .form-control::-webkit-placeholder,
-#contact .form-control::-moz-placeholder,
-#contact .form-control:-ms-input-placeholder,
-#contact .form-control::placeholder {
+#contact .form-control::-moz-placeholder {
   color: #ffffff;
-  opacity: 1;
+  opacity: 1
+}
+
+#contact .form-control:-ms-input-placeholder {
+  color: #ffffff
+}
+
+#contact .form-control::-webkit-input-placeholder {
+  color: #ffffff
 }
 
 #contact .form-control:focus {
