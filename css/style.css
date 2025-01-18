@@ -1470,7 +1470,7 @@ footer {
 
 
 
-/*---------------------------------------
+/* ---------------------------------------
    Mobile Responsive         
 -----------------------------------------*/
 
@@ -1542,6 +1542,29 @@ footer {
 /*---------------------------------------
    Night Mode theme              
 -----------------------------------------*/
+
+.navbar-toggle-wrapper {
+  align-items: center;
+}
+
+.navbar-night-mode {
+  background: transparent;
+  border: none;
+  padding: 15px 10px;
+  float: right;
+  position: relative;
+  margin-right: 5px;
+  color: #E3AE57;
+  transition: all 0.3s ease;
+}
+
+.night-mode-desktop .night-mode-toggle {
+  padding: 15px 15px;
+}
+
+.night-mode-desktop .night-mode-toggle i {
+  font-size: 15px;
+}
 
 body.dark-theme {
   background: #121212;
