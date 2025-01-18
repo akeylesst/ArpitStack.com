@@ -80,7 +80,7 @@ $(document).ready(function () {
   const loadMoreBtn = document.getElementById("load-more-btn");
 
   let currentPage = 1;
-  const blogsPerPage = 6;
+  const blogsPerPage = 3;
 
   function fetchBlogs(page) {
     fetch(`https://dev.to/api/articles?username=arpitstack&per_page=${blogsPerPage}&page=${page}`)
