@@ -95,30 +95,27 @@ $(document).ready(function () {
       })
       .catch(error => {
         console.error("Error fetching blogs:", error);
-        blogContainer.innerHTML = `<p class="color-white">Failed to load blogs. Please try again later.</p>`;
+        blogContainer.innerHTML = `<div class="error-message">Failed to load blogs. Please try again later.</div>`;
       });
   }
 
   function displayBlogs(blogs) {
     blogs.forEach(blog => {
       const blogCard = document.createElement('div');
-      blogCard.classList.add('col-md-4', 'col-sm-6');
+      blogCard.classList.add('blog-card');
 
       blogCard.innerHTML = `
-        <div class="wow fadeInUp" data-wow-delay="0.3s">
-          <div class="blogs-thumb">
-            <img src="${blog.cover_image || 'images/default-blog-img.png'}" alt="Blog title: ${blog.title}" class="blog-card-img">
-            <h3 class="blog-title">${blog.title}</h3>
-            <p class="blog-excerpt">${blog.description || blog.body.slice(0, 100)}...</p>
-            <div class="btn-blog-wrapper">
-              <a href="${blog.url}" class="btn-blog" target="_blank">Read More</a>
-            </div>
-          </div>
-        </div>
-      `;
+      <div class="blog-content">
+        ${blog.cover_image ? `<img src="${blog.cover_image}" alt="${blog.title}" class="blog-image">` : ''}
+        <h3 class="blog-title">${blog.title}</h3>
+        <p class="blog-excerpt">${blog.description || blog.body.slice(0, 150)}...</p>
+        <a href="${blog.url}" target="_blank" rel="noopener noreferrer" class="read-more-btn">Read More</a>
+      </div>
+    `;
       blogContainer.appendChild(blogCard);
     });
   }
+
   loadMoreBtn.addEventListener("click", () => {
     fetchBlogs(currentPage);
   });
