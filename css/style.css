@@ -423,7 +423,7 @@ a:focus {
 
 #about .about-thumb,
 #about .skill-thumb,
-.recommendations-thumb {
+.testimonials-thumb {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -479,24 +479,24 @@ a:focus {
   padding-bottom: 8px;
 }
 
-.recommendations-wrapper {
+.testimonials-wrapper {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.recommendation-item {
+.testimonial-item {
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.recommendation-item:last-child {
+.testimonial-item:last-child {
   margin-bottom: 0;
 }
 
-.recommendation-text {
+.testimonial-text {
   color: #ffffff;
   font-size: 14px;
   line-height: 1.6;
@@ -538,7 +538,7 @@ a:focus {
 
   #about .about-thumb,
   #about .skill-thumb,
-  .recommendations-thumb {
+  .testimonials-thumb {
     padding: 40px 15px;
   }
 
@@ -547,11 +547,11 @@ a:focus {
     font-size: 13px;
   }
 
-  .recommendation-item {
+  .testimonial-item {
     padding: 12px;
   }
 
-  .recommendation-text {
+  .testimonial-text {
     font-size: 13px;
   }
 
@@ -565,7 +565,7 @@ a:focus {
 
   #about .about-thumb,
   #about .skill-thumb,
-  .recommendations-thumb {
+  .testimonials-thumb {
     padding: 30px 10px;
   }
 
@@ -1566,11 +1566,13 @@ footer {
   font-size: 15px;
 }
 
+/* Base Styles */
 body.dark-theme {
   background: #121212;
   color: #e0e0e0;
 }
 
+/* Typography */
 body.dark-theme h1,
 body.dark-theme h2,
 body.dark-theme h3,
@@ -1588,6 +1590,7 @@ body.dark-theme strong {
   color: #cfcece;
 }
 
+/* Links */
 body.dark-theme a {
   color: #bb86fc;
   text-decoration: none;
@@ -1597,6 +1600,7 @@ body.dark-theme a:hover {
   color: #03dac6;
 }
 
+/* Navigation */
 body.dark-theme .custom-navbar {
   background-color: #1f1f1f;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.6);
@@ -1610,6 +1614,7 @@ body.dark-theme .custom-navbar .nav li a:hover {
   color: #bb86fc;
 }
 
+/* Buttons */
 body.dark-theme .section-btn {
   background: transparent;
   border-color: #bb86fc;
@@ -1619,6 +1624,29 @@ body.dark-theme .section-btn {
 body.dark-theme .section-btn:hover {
   background: #bb86fc;
   color: #121212;
+}
+
+body.dark-theme .btn {
+  background: #bb86fc;
+  color: #121212;
+  border: none;
+}
+
+body.dark-theme .btn:hover {
+  background: #03dac6;
+  color: #121212;
+}
+
+body.dark-theme #load-more-btn {
+  background: #bb86fc;
+  color: #121212;
+  border: 2px solid #bb86fc;
+}
+
+body.dark-theme #load-more-btn:hover {
+  background: #03dac6;
+  color: #121212;
+  border-color: #03dac6;
 }
 
 /* Home Section */
@@ -1658,7 +1686,7 @@ body.dark-theme #home .home-img::after {
   pointer-events: none;
 }
 
-/* About, Experience, Education, Blog, Contact Sections */
+/* Section Backgrounds */
 body.dark-theme #about,
 body.dark-theme #experience,
 body.dark-theme #education,
@@ -1703,7 +1731,7 @@ body.dark-theme #experience .timeline-icon i {
 
 body.dark-theme #experience .timeline-content {
   background: rgba(30, 30, 30, 0.8);
-  border: 1px solid #2c2c2c;
+  border: 5px solid #09856a;
   color: #e0e0e0;
 }
 
@@ -1720,11 +1748,12 @@ body.dark-theme #experience .timeline-content .duration {
 }
 
 body.dark-theme #experience .timeline-content:hover {
+  transform: translateY(-5px) scale(1.05);
   background: rgba(50, 50, 50, 0.9);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* Education Background (Dark Theme) */
+/* Education Section */
 body.dark-theme .education-background {
   position: absolute;
   top: 0;
@@ -1737,7 +1766,27 @@ body.dark-theme .education-background {
   will-change: transform;
 }
 
-/* Blog Thumbnails (Dark Theme) */
+/* Project Section */
+body.dark-theme #project {
+  background: #3e3b3a;
+}
+
+body.dark-theme #project .projects-thumb {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme #project .projects-thumb:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme #project .projects-thumb h3,
+body.dark-theme #project .projects-thumb .fa,
+body.dark-theme #project .projects-content {
+  color: #ffffff;
+}
+
+/* Blog Section */
 body.dark-theme #blog .blogs-thumb {
   background: #2c2c2c;
   padding: 30px;
@@ -1748,7 +1797,6 @@ body.dark-theme #blog .blogs-thumb {
   border-radius: 10px;
 }
 
-/* Blog Title (Dark Theme) */
 body.dark-theme #blog .blogs-thumb .blog-title {
   font-size: 24px;
   font-weight: bold;
@@ -1756,11 +1804,22 @@ body.dark-theme #blog .blogs-thumb .blog-title {
   margin-bottom: 15px;
 }
 
-/* Blog Excerpt (Dark Theme) */
 body.dark-theme #blog .blogs-thumb .blog-excerpt {
   font-size: 16px;
   color: #bdbdbd;
   margin-bottom: 15px;
+}
+
+body.dark-theme #blog .blogs-thumb .btn-blog {
+  background: transparent;
+  border: 2px solid #bb86fc;
+  color: #bb86fc;
+}
+
+body.dark-theme #blog .blogs-thumb .btn-blog:hover {
+  background: #03dac6;
+  color: #121212;
+  border-color: #03dac6;
 }
 
 /* Footer */
@@ -1769,7 +1828,7 @@ body.dark-theme footer {
   color: #bdbdbd;
 }
 
-/* Dark Mode Color Adjustments */
+/* Color Utilities */
 body.dark-theme .color-white {
   color: #ffffff;
 }
@@ -1779,7 +1838,7 @@ body.dark-theme .color-yellow {
 }
 
 body.dark-theme .bg-yellow {
-  background: #404a37;
+  background: #5d6a51;
 }
 
 body.dark-theme .bg-green {
@@ -1802,44 +1861,7 @@ body.dark-theme .bg-white {
   background: #1e1e1e;
 }
 
-/* Buttons */
-body.dark-theme .btn {
-  background: #bb86fc;
-  color: #121212;
-  border: none;
-}
-
-body.dark-theme .btn:hover {
-  background: #03dac6;
-  color: #121212;
-}
-
-body.dark-theme #load-more-btn {
-  background: #bb86fc;
-  color: #121212;
-  border: 2px solid #bb86fc;
-}
-
-body.dark-theme #load-more-btn:hover {
-  background: #03dac6;
-  color: #121212;
-  border-color: #03dac6;
-}
-
-/* Read More Blogs Button */
-body.dark-theme #blog .blogs-thumb .btn-blog {
-  background: transparent;
-  border: 2px solid #bb86fc;
-  color: #bb86fc;
-}
-
-body.dark-theme #blog .blogs-thumb .btn-blog:hover {
-  background: #03dac6;
-  color: #121212;
-  border-color: #03dac6;
-}
-
-/* Input Fields */
+/* Form Elements */
 body.dark-theme .form-control {
   background: #1e1e1e;
   color: #ffffff;
@@ -1850,10 +1872,9 @@ body.dark-theme .form-control:focus {
   border-bottom: 1px solid #03dac6;
 }
 
-/* Card and Box Shadows */
+/* Cards and Boxes */
 body.dark-theme .card,
 body.dark-theme .education-box,
-body.dark-theme .projects-thumb,
 body.dark-theme .blogs-thumb {
   background: #1e1e1e;
   border: 1px solid #2c2c2c;
