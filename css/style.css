@@ -1061,10 +1061,6 @@ a:focus {
   transform-style: preserve-3d;
 }
 
-#quotes p {
-  padding-top: 32px;
-}
-
 @keyframes rotateIcon3D {
   0% {
     transform: rotateY(0deg);
@@ -1077,6 +1073,10 @@ a:focus {
   100% {
     transform: rotateY(360deg);
   }
+}
+
+#quotes p {
+  padding-top: 32px;
 }
 
 
