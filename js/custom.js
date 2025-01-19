@@ -64,7 +64,7 @@ $(document).ready(function () {
 
   setTimeout(function () {
     var typed = new Typed('.typing', {
-      strings: ["Arpit Gupta", "An Innovator", "An Engineer", "A Solver", "A Developer", "A BugHunter"],
+      strings: ["Arpit Gupta", "An Innovator", "An Engineer", "A Solver", "A Creator", "A Developer", "A BugHunter", "An Author"],
       loop: true,
       typeSpeed: 150,
       backSpeed: 100
