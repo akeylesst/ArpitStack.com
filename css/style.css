@@ -1512,8 +1512,9 @@ footer {
   }
 }
 
+
 /*---------------------------------------
-   Night Mode theme              
+   Night Mode Toggle         
 -----------------------------------------*/
 
 .navbar-toggle-wrapper {
@@ -1531,6 +1532,10 @@ footer {
   transition: all 0.3s ease;
 }
 
+.night-mode-desktop {
+  display: none !important;
+}
+
 .night-mode-desktop .night-mode-toggle {
   padding: 15px 15px;
 }
@@ -1538,6 +1543,31 @@ footer {
 .night-mode-desktop .night-mode-toggle i {
   font-size: 15px;
 }
+
+@media (max-width: 767px) {
+  .navbar-night-mode {
+    display: block;
+  }
+
+  .night-mode-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-night-mode {
+    display: none;
+  }
+
+  .night-mode-desktop {
+    display: block !important;
+  }
+}
+
+
+/*---------------------------------------
+   Night Mode theme              
+-----------------------------------------*/
 
 /* Base Styles */
 body.dark-theme {
