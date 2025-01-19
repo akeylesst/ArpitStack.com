@@ -88,6 +88,10 @@ $(document).ready(function () {
         if (blogs.length > 0) {
           displayBlogs(blogs);
           currentPage++;
+
+          if (blogs.length < blogsPerPage) {
+            loadMoreBtn.style.display = "none";
+          }
         } else {
           loadMoreBtn.style.display = "none";
         }
