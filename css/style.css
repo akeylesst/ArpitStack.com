@@ -1603,6 +1603,17 @@ body.dark-theme a:hover {
   color: #03dac6;
 }
 
+/* Section Backgrounds */
+body.dark-theme #about,
+body.dark-theme #experience,
+body.dark-theme #education,
+body.dark-theme #project,
+body.dark-theme #blog,
+body.dark-theme #contact {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
 /* Navigation */
 body.dark-theme .custom-navbar {
   background-color: #1f1f1f;
@@ -1641,15 +1652,25 @@ body.dark-theme .btn:hover {
 }
 
 body.dark-theme #load-more-btn {
+  padding: 1rem 2rem;
   background: #bb86fc;
   color: #121212;
-  border: 2px solid #bb86fc;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  z-index: 1;
+  margin-bottom: 20px;
+  margin-top: 35px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-theme #load-more-btn:hover {
   background: #03dac6;
-  color: #121212;
-  border-color: #03dac6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Home Section */
@@ -1689,15 +1710,27 @@ body.dark-theme #home .home-img::after {
   pointer-events: none;
 }
 
-/* Section Backgrounds */
-body.dark-theme #about,
-body.dark-theme #experience,
-body.dark-theme #education,
-body.dark-theme #project,
-body.dark-theme #blog,
-body.dark-theme #contact {
-  background-color: #1f1f1f;
-  color: #e0e0e0;
+body.dark-theme #home .section-btn {
+  background-color: transparent;
+  border: 3px solid #bb86fc;
+  color: #bb86fc;
+}
+
+body.dark-theme #home .section-btn:hover {
+  background-color: #bb86fc;
+  color: #121212;
+}
+
+/* About Section */
+body.dark-theme .btn-resume {
+  background-color: transparent;
+  border: 2px solid #bb86fc;
+  color: #bb86fc;
+}
+
+body.dark-theme .btn-resume:hover {
+  background-color: #bb86fc;
+  color: #121212;
 }
 
 /* Experience Section */
@@ -1789,10 +1822,20 @@ body.dark-theme #project .projects-content {
   color: #ffffff;
 }
 
+body.dark-theme .btn-project {
+  background-color: transparent;
+  border: 2px solid #bb86fc;
+  color: #bb86fc;
+}
+
+body.dark-theme .btn-project:hover {
+  background-color: #bb86fc;
+  color: #121212;
+}
+
 /* Blog Section */
 body.dark-theme #blog {
   background: #1f1f1f;
-  /* Dark background */
   padding: 4rem 2rem;
   min-height: 100vh;
 }
@@ -1811,11 +1854,9 @@ body.dark-theme #blog .blog-grid {
 
 body.dark-theme #blog .blog-card {
   background: #2c2c2c;
-  /* Dark card background */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  /* Slightly darker shadow */
   transition: transform 0.3s ease;
   height: 100%;
   display: flex;
@@ -1844,7 +1885,6 @@ body.dark-theme #blog .blog-image {
 body.dark-theme #blog .blog-title {
   font-size: 2.2rem;
   color: #bb86fc;
-  /* Light purple for the title */
   font-weight: bold;
   margin: 1rem 0;
   display: -webkit-box;
@@ -1856,7 +1896,6 @@ body.dark-theme #blog .blog-title {
 
 body.dark-theme #blog .blog-excerpt {
   color: #ccc;
-  /* Light gray for text */
   line-height: 1.6;
   margin-bottom: 1.5rem;
   display: -webkit-box;
@@ -1871,9 +1910,7 @@ body.dark-theme #blog .read-more-btn {
   padding: 0.75rem 1.5rem;
   background: transparent;
   border: 2px solid #bb86fc;
-  /* Purple border */
   color: #bb86fc;
-  /* Light purple text */
   border-radius: 25px;
   text-decoration: none;
   font-weight: 500;
@@ -1890,6 +1927,18 @@ body.dark-theme #blog .read-more-btn:hover {
   background: #bb86fc;
   color: #121212;
   border-color: #bb86fc;
+}
+
+/* Contact Section */
+body.dark-theme .btn-sponsor {
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+body.dark-theme .btn-sponsor:hover {
+  background-color: #ffffff;
+  color: #a561fa;
 }
 
 /* Footer */
