@@ -62,7 +62,6 @@ $(document).ready(function () {
       Typed.js - Animation for typing text
   -------------------------------------------------------------------------------*/
 
-  // Delay the typing effect to start after fadeInUp animation
   setTimeout(function () {
     var typed = new Typed('.typing', {
       strings: ["Arpit Gupta", "An Innovator", "An Engineer", "A Solver", "A Developer", "A BugHunter"],
@@ -127,13 +126,19 @@ $(document).ready(function () {
   -------------------------------------------------------------------------------*/
 
   const nightModeToggles = document.querySelectorAll('.navbar-night-mode, .night-mode-toggle');
+  const toggleSound = document.getElementById('toggle-sound');
 
   nightModeToggles.forEach(toggle => {
     toggle.addEventListener('click', function (e) {
       e.preventDefault();
+
+      if (toggleSound) {
+        toggleSound.currentTime = 0;
+        toggleSound.play();
+      }
+
       document.body.classList.toggle('dark-theme');
 
-      // Toggle icon
       const icons = document.querySelectorAll('.fa-moon-o, .fa-sun-o');
       icons.forEach(icon => {
         if (icon.classList.contains('fa-moon-o')) {
