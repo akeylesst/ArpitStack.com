@@ -252,12 +252,20 @@ $(document).ready(function () {
 
   // Event listeners
   prevButton.addEventListener('click', () => {
-    updateCarousel(currentIndex - 1);
+    if (currentIndex === 0) {
+      updateCarousel(getMaxIndex());
+    } else {
+      updateCarousel(currentIndex - 1);
+    }
     resetAutoScroll();
   });
 
   nextButton.addEventListener('click', () => {
-    updateCarousel(currentIndex + 1);
+    if (currentIndex === getMaxIndex()) {
+      updateCarousel(0);
+    } else {
+      updateCarousel(currentIndex + 1);
+    }
     resetAutoScroll();
   });
 
