@@ -160,6 +160,15 @@ $(document).ready(function () {
   let autoScrollInterval;
   const scrollDelay = 3000; // 3 seconds between slides
 
+  // Truncate book descriptions
+  const bookDescriptions = document.querySelectorAll('.book-info p');
+  bookDescriptions.forEach(description => {
+    const text = description.textContent;
+    if (text.length > 150) {
+      description.textContent = text.slice(0, 150) + '...';
+    }
+  });
+
   // Calculate the number of visible cards based on viewport width
   function getVisibleCards() {
     const viewportWidth = window.innerWidth;

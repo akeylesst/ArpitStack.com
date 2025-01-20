@@ -1304,6 +1304,8 @@ a:focus {
   backdrop-filter: blur(5px);
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-card:hover {
@@ -1329,6 +1331,9 @@ a:focus {
 .book-info {
   text-align: center;
   color: white;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .book-info h3 {
@@ -1349,6 +1354,7 @@ a:focus {
   color: #b4c3c4;
   margin-bottom: 25px;
   line-height: 1.6;
+  flex: 1;
 }
 
 .btn-book {
@@ -1359,8 +1365,9 @@ a:focus {
   border-radius: 25px;
   text-decoration: none;
   transition: all 0.3s ease;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   border: 2px solid #e74c3c;
+  margin-top: auto;
 }
 
 .btn-book:hover {
