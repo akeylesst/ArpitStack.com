@@ -1262,68 +1262,52 @@ a:focus {
   padding: 58px 0;
   position: relative;
   text-align: center;
-  /* Center align the title */
 }
 
 #books .section-title {
   margin-bottom: 50px;
   text-align: center;
   padding: 0 20px;
-  /* Consistent padding with other sections */
 }
 
 .books-carousel-container {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 60px;
-  /* Increased padding for navigation buttons */
+  padding: 0 80px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .books-carousel {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  gap: 30px;
+  gap: 35px;
   padding: 20px 0;
-  animation: autoScroll 15s linear infinite;
-  /* Auto-play animation */
-}
-
-@keyframes autoScroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-100% - 30px));
-  }
-}
-
-.carousel-track:hover {
-  animation-play-state: paused;
-  /* Pause on hover */
+  width: 100%;
+  margin-left: 11px;
 }
 
 .book-card {
   flex: 0 0 calc(33.333% - 20px);
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
   padding: 25px;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  min-width: 300px;
+  backdrop-filter: blur(5px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .book-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.048);
 }
 
 .book-cover {
@@ -1349,7 +1333,6 @@ a:focus {
 
 .book-info h3 {
   font-size: 1.8rem;
-  /* Increased font size */
   margin-bottom: 15px;
   color: #ecf0f1;
   line-height: 1.3;
@@ -1357,15 +1340,13 @@ a:focus {
 
 .book-info h4 {
   font-size: 1.2rem;
-  /* Increased font size */
   color: #bdc3c7;
   margin-bottom: 20px;
 }
 
 .book-info p {
-  font-size: 1.1rem;
-  /* Increased font size */
-  color: #95a5a6;
+  font-size: 1.35rem;
+  color: #b4c3c4;
   margin-bottom: 25px;
   line-height: 1.6;
 }
@@ -1378,174 +1359,122 @@ a:focus {
   border-radius: 25px;
   text-decoration: none;
   transition: all 0.3s ease;
-  font-size: 1.1rem;
-  /* Increased font size */
-  border: 2px solid transparent;
+  font-size: 1.3rem;
+  border: 2px solid #e74c3c;
 }
 
 .btn-book:hover {
-  background: transparent;
+  background: #fa6a5a;
   border-color: #e74c3c;
-  color: #e74c3c;
+  color: #ffff;
 }
 
+/* Navigation Buttons */
 .carousel-nav {
-  position: fixed;
-  /* Changed from absolute to fixed */
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
-  /* Increased size */
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  /* More visible background */
+  background: rgba(0, 0, 0, 0.5);
   border: none;
   color: white;
   cursor: pointer;
   z-index: 100;
-  /* Increased z-index to ensure visibility */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  /* Larger icons */
   transition: all 0.3s ease;
 }
 
-.prev-btn,
-.next-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-  /* Optional for better visibility */
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
-
 .prev-btn {
-  left: -20px;
-  z-index: 50;
-  /* Moved to the viewport edge */
+  left: 40px;
 }
 
 .next-btn {
-  right: 20px;
-  /* Moved to the viewport edge */
+  right: 40px;
 }
 
 .carousel-nav:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
   transform: translateY(-50%) scale(1.1);
 }
 
-@keyframes autoScroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  /* Pause at each card */
-  20% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-33.333%);
-  }
-
-  45% {
-    transform: translateX(-33.333%);
-  }
-
-  50% {
-    transform: translateX(-66.666%);
-  }
-
-  70% {
-    transform: translateX(-66.666%);
-  }
-
-  75% {
-    transform: translateX(-100%);
-  }
-
-  95% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
+/* Indicators */
 .carousel-indicators {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 50px;
+  margin-top: 30px;
+  padding: 20px 0;
 }
 
 .indicator {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .indicator.active {
   background: #e74c3c;
+  transform: scale(1.2);
 }
 
-@media (max-width: 1200px) {
+/* Responsive Design */
+@media (min-width: 1441px) {
+  .book-card {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .book-card {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
   .books-carousel-container {
-    padding: 0 40px;
+    padding: 0 60px;
   }
 
   .book-card {
-    min-width: 280px;
-  }
-}
-
-@media (max-width: 992px) {
-  .book-card {
-    flex: 0 0 calc(50% - 20px);
-    min-width: 260px;
-  }
-
-  .book-info h3 {
-    font-size: 1.6rem;
-  }
-
-  .book-info h4 {
-    font-size: 1.1rem;
+    flex: 0 0 calc(50% - 15px);
+    width: calc(50% - 15px);
   }
 }
 
 @media (max-width: 768px) {
   .books-carousel-container {
-    padding: 0 20px;
+    padding: 0 40px;
   }
 
   .book-card {
-    flex: 0 0 calc(100% - 20px);
-    min-width: 240px;
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0;
   }
 
   .book-cover {
-    height: 250px;
+    height: 280px;
   }
 
   .carousel-nav {
     width: 40px;
     height: 40px;
     font-size: 20px;
+  }
+
+  .carousel-track {
+    gap: 20px;
   }
 
   .prev-btn {
@@ -1558,21 +1487,69 @@ a:focus {
 }
 
 @media (max-width: 480px) {
-  .book-card {
-    padding: 20px;
+  .books-carousel-container {
+    padding: 0 30px;
   }
 
-  .book-info h3 {
-    font-size: 1.4rem;
+  .book-card {
+    padding: 15px;
   }
 
   .book-cover {
     height: 200px;
   }
 
+  .book-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .book-info p {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .books-carousel-container {
+    padding: 0 25px;
+  }
+
+  .book-card {
+    min-width: 220px;
+    max-width: 280px;
+  }
+
+  .book-cover {
+    height: 220px;
+  }
+}
+
+@media (max-width: 320px) {
+  .books-carousel-container {
+    padding: 0 20px;
+  }
+
+  .book-card {
+    padding: 12px;
+  }
+
+  .book-cover {
+    height: 180px;
+  }
+
+  .book-info h3 {
+    font-size: 1.35rem;
+  }
+
+  .book-info h4 {
+    font-size: 1.1rem;
+  }
+
+  .book-info p {
+    font-size: 1.1rem;
+  }
+
   .btn-book {
-    padding: 10px 25px;
-    font-size: 1rem;
+    padding: 10px 20px;
   }
 }
 
@@ -2124,11 +2101,11 @@ body.dark-theme .btn-project:hover {
 
 /* Blog Section */
 body.dark-theme #blog {
-  background-color: #1f1f1f;
+  background-color: #23372d;
 }
 
 body.dark-theme #blog .blog-card {
-  background: #2c2c2c;
+  background: #453f3f;
 }
 
 body.dark-theme #blog .blog-title {
@@ -2151,29 +2128,68 @@ body.dark-theme #blog .read-more-btn:hover {
 
 /* Books Section */
 body.dark-theme #books {
-  background: #1a1a1a;
+  background: #16212c;
 }
 
 body.dark-theme .book-card {
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
 }
 
 body.dark-theme .book-card:hover {
   background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-theme .book-info h3 {
+  color: #e0e0e0;
+}
+
+body.dark-theme .book-info h4 {
+  color: #bbbbbb;
+}
+
+body.dark-theme .book-info p {
+  color: #cccccc;
 }
 
 body.dark-theme .btn-book {
-  background: #bb86fc;
+  background-color: #bb86fc;
   color: #121212;
+  border: 2px solid #bb86fc;
 }
 
 body.dark-theme .btn-book:hover {
-  background: transparent;
-  border-color: #bb86fc;
+  background: #03dac6;
+  border-color: #03dac6;
+  color: #121212;
+
+}
+
+body.dark-theme .carousel-nav {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+body.dark-theme .carousel-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
   color: #bb86fc;
 }
 
+body.dark-theme .carousel-indicators .indicator {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-theme .carousel-indicators .indicator.active {
+  background: #bb86fc;
+}
+
 /* Contact Section */
+body.dark-theme #contact {
+  background-color: #452b23;
+}
+
 body.dark-theme .btn-sponsor {
   background-color: transparent;
   border: 2px solid #ffffff;

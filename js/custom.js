@@ -157,117 +157,158 @@ $(document).ready(function () {
   const indicatorsContainer = document.querySelector('.carousel-indicators');
 
   let currentIndex = 0;
-  let startPos = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
-  let isDragging = false;
+  let autoScrollInterval;
+  const scrollDelay = 3000; // 3 seconds between slides
+
+  // Calculate the number of visible cards based on viewport width
+  function getVisibleCards() {
+    const viewportWidth = window.innerWidth;
+    if (viewportWidth < 768) return 1;
+    if (viewportWidth < 1024) return 2;
+    return 3;
+  }
+
+  // Calculate maximum index based on visible cards
+  function getMaxIndex() {
+    return Math.max(0, cards.length - getVisibleCards());
+  }
+
+  // Calculate card width including gap
+  function getCardWidth() {
+    const card = cards[0];
+    const cardStyle = window.getComputedStyle(card);
+    const gap = parseInt(window.getComputedStyle(track).gap) || 0;
+    const marginLeft = parseInt(cardStyle.marginLeft) || 0;
+    const marginRight = parseInt(cardStyle.marginRight) || 0;
+
+    // Include the card's full width plus gap and margins
+    return card.offsetWidth + gap + marginLeft + marginRight;
+  }
+
+  // Update carousel position
+  function updateCarousel(index, animate = true) {
+    currentIndex = Math.min(Math.max(index, 0), getMaxIndex());
+    const cardWidth = getCardWidth();
+
+    if (!animate) {
+      track.style.transition = 'none';
+    }
+
+    // Calculate exact position including gap
+    const position = -currentIndex * cardWidth;
+    track.style.transform = `translateX(${position}px)`;
+
+    if (!animate) {
+      track.offsetHeight; // Force reflow
+      track.style.transition = '';
+    }
+
+    updateIndicators();
+  }
 
   // Create indicators
-  cards.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('indicator');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    indicatorsContainer.appendChild(dot);
-  });
+  function createIndicators() {
+    indicatorsContainer.innerHTML = '';
+    const numIndicators = getMaxIndex() + 1;
+
+    for (let i = 0; i < numIndicators; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('indicator');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        updateCarousel(i);
+        resetAutoScroll();
+      });
+      indicatorsContainer.appendChild(dot);
+    }
+  }
 
   // Update indicators
   function updateIndicators() {
-    document.querySelectorAll('.indicator').forEach((indicator, index) => {
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, index) => {
       indicator.classList.toggle('active', index === currentIndex);
     });
   }
 
-  // Calculate the number of visible cards based on viewport width
-  function getVisibleCards() {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 992) return 2;
-    return 3;
+  // Auto scroll function
+  function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+      if (currentIndex >= getMaxIndex()) {
+        // Smoothly return to first slide
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+      updateCarousel(currentIndex);
+    }, scrollDelay);
   }
 
-  // Go to specific slide
-  function goToSlide(index) {
-    const visibleCards = getVisibleCards();
-    currentIndex = Math.min(Math.max(index, 0), cards.length - visibleCards);
-    const cardWidth = cards[0].offsetWidth + 30; // Including gap
-    currentTranslate = -currentIndex * cardWidth;
-    prevTranslate = currentTranslate;
-    setSliderPosition();
-    updateIndicators();
+  // Reset auto scroll
+  function resetAutoScroll() {
+    clearInterval(autoScrollInterval);
+    startAutoScroll();
   }
 
-  // Set slider position
-  function setSliderPosition() {
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  }
-
-  // Navigation buttons
+  // Event listeners
   prevButton.addEventListener('click', () => {
-    const visibleCards = getVisibleCards();
-    if (currentIndex > 0) {
-      currentIndex--;
-      goToSlide(currentIndex);
-    } else {
-      // Loop back to the last slide
-      currentIndex = cards.length - visibleCards;
-      goToSlide(currentIndex);
-    }
+    updateCarousel(currentIndex - 1);
+    resetAutoScroll();
   });
 
   nextButton.addEventListener('click', () => {
-    const visibleCards = getVisibleCards();
-    if (currentIndex < cards.length - visibleCards) {
-      currentIndex++;
-      goToSlide(currentIndex);
-    } else {
-      // Loop back to the first slide
-      currentIndex = 0;
-      goToSlide(currentIndex);
-    }
+    updateCarousel(currentIndex + 1);
+    resetAutoScroll();
   });
 
-  // Touch events
-  track.addEventListener('touchstart', touchStart);
-  track.addEventListener('touchmove', touchMove);
-  track.addEventListener('touchend', touchEnd);
-
-  function touchStart(event) {
-    startPos = event.touches[0].clientX;
-    isDragging = true;
-    track.style.transition = 'none';
-  }
-
-  function touchMove(event) {
-    if (!isDragging) return;
-    const currentPosition = event.touches[0].clientX;
-    currentTranslate = prevTranslate + currentPosition - startPos;
-    setSliderPosition();
-  }
-
-  function touchEnd() {
-    isDragging = false;
-    track.style.transition = 'transform 0.5s ease-in-out';
-
-    const movedBy = currentTranslate - prevTranslate;
-
-    if (Math.abs(movedBy) > 100) {
-      if (movedBy < 0) {
-        currentIndex = Math.min(currentIndex + 1, cards.length - getVisibleCards());
-      } else {
-        currentIndex = Math.max(currentIndex - 1, 0);
-      }
-    }
-
-    goToSlide(currentIndex);
-  }
-
-  // Window resize handling
+  // Handle window resize
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      goToSlide(currentIndex);
+      // Adjust current index if necessary
+      const maxIndex = getMaxIndex();
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+      createIndicators();
+      updateCarousel(currentIndex, false);
     }, 250);
   });
 
+  // Initialize carousel
+  function initCarousel() {
+    // Set initial position
+    updateCarousel(0, false);
+
+    // Create indicators
+    createIndicators();
+
+    // Start auto-scroll with proper timing
+    startAutoScroll();
+
+    // Add resize observer to handle container width changes
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const maxIndex = getMaxIndex();
+          if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+          }
+          updateCarousel(currentIndex, false);
+          createIndicators();
+        }, 250);
+      }
+    });
+
+    resizeObserver.observe(track.parentElement);
+  }
+
+  // Pause auto-scroll on hover
+  track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+  track.addEventListener('mouseleave', startAutoScroll);
+
+  // Initialize on load
+  initCarousel();
 });
