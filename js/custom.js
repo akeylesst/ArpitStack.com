@@ -1,20 +1,18 @@
 /*-------------------------------------------------------------------------------
   PRE LOADER
 -------------------------------------------------------------------------------*/
-
 $(window).load(function () {
-  $('.preloader').fadeOut(1000); // set duration in brackets    
+  $('.preloader').fadeOut(1000); // Set duration in brackets    
 });
 
-/* HTML document is loaded. DOM is ready. 
--------------------------------------------*/
-
+/*-------------------------------------------------------------------------------
+  HTML document is loaded. DOM is ready.
+-------------------------------------------------------------------------------*/
 $(document).ready(function () {
 
   /*-------------------------------------------------------------------------------
     Navigation - Hide mobile menu after clicking on a link
   -------------------------------------------------------------------------------*/
-
   $('.navbar-collapse a').click(function () {
     $(".navbar-collapse").collapse('hide');
   });
@@ -22,7 +20,6 @@ $(document).ready(function () {
   /*-------------------------------------------------------------------------------
     jQuery Parallax
   -------------------------------------------------------------------------------*/
-
   function initParallax() {
     $('#home').parallax("100%", 0.1);
     $('#about').parallax("100%", 0.3);
@@ -31,6 +28,7 @@ $(document).ready(function () {
     $('#projects').parallax("100%", 0.2);
     $('#quotes').parallax("100%", 0.3);
     $('#blog').parallax("100%", 0.1);
+    $('#books').parallax("100%", 0.1);
     $('#contact').parallax("100%", 0.1);
     $('footer').parallax("100%", 0.2);
   }
@@ -39,7 +37,6 @@ $(document).ready(function () {
   /*-------------------------------------------------------------------------------
     smoothScroll js
   -------------------------------------------------------------------------------*/
-
   $(function () {
     $('.custom-navbar a, #home a').bind('click', function (event) {
       var target = $($(this).attr('href'));
@@ -55,13 +52,11 @@ $(document).ready(function () {
   /*-------------------------------------------------------------------------------
     wow js - Animation js
   -------------------------------------------------------------------------------*/
-
   new WOW({ mobile: false }).init();
 
   /*-------------------------------------------------------------------------------
-      Typed.js - Animation for typing text
+    Typed.js - Animation for typing text
   -------------------------------------------------------------------------------*/
-
   setTimeout(function () {
     var typed = new Typed('.typing', {
       strings: ["Arpit Gupta", "An Innovator", "An Engineer", "A Solver", "A Creator", "A Developer", "A BugHunter", "An Author"],
@@ -74,7 +69,6 @@ $(document).ready(function () {
   /*-------------------------------------------------------------------------------
     Fetch and display blogs with "Load More" functionality
   -------------------------------------------------------------------------------*/
-
   const blogContainer = document.getElementById("blog-container");
   const loadMoreBtn = document.getElementById("load-more-btn");
 
@@ -126,9 +120,8 @@ $(document).ready(function () {
   fetchBlogs(currentPage);
 
   /*-------------------------------------------------------------------------------
-    Toggle Night Mode functionality
+    Toggle Night Mode
   -------------------------------------------------------------------------------*/
-
   const nightModeToggles = document.querySelectorAll('.navbar-night-mode, .night-mode-toggle');
   const toggleSound = document.getElementById('toggle-sound');
 
@@ -152,6 +145,129 @@ $(document).ready(function () {
         }
       });
     });
+  });
+
+  /*-------------------------------------------------------------------------------
+    Carousel Slider
+  -------------------------------------------------------------------------------*/
+  const track = document.querySelector('.carousel-track');
+  const cards = document.querySelectorAll('.book-card');
+  const prevButton = document.querySelector('.prev-btn');
+  const nextButton = document.querySelector('.next-btn');
+  const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+  let currentIndex = 0;
+  let startPos = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+
+  // Create indicators
+  cards.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('indicator');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
+    indicatorsContainer.appendChild(dot);
+  });
+
+  // Update indicators
+  function updateIndicators() {
+    document.querySelectorAll('.indicator').forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentIndex);
+    });
+  }
+
+  // Calculate the number of visible cards based on viewport width
+  function getVisibleCards() {
+    if (window.innerWidth < 768) return 1;
+    if (window.innerWidth < 992) return 2;
+    return 3;
+  }
+
+  // Go to specific slide
+  function goToSlide(index) {
+    const visibleCards = getVisibleCards();
+    currentIndex = Math.min(Math.max(index, 0), cards.length - visibleCards);
+    const cardWidth = cards[0].offsetWidth + 30; // Including gap
+    currentTranslate = -currentIndex * cardWidth;
+    prevTranslate = currentTranslate;
+    setSliderPosition();
+    updateIndicators();
+  }
+
+  // Set slider position
+  function setSliderPosition() {
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  // Navigation buttons
+  prevButton.addEventListener('click', () => {
+    const visibleCards = getVisibleCards();
+    if (currentIndex > 0) {
+      currentIndex--;
+      goToSlide(currentIndex);
+    } else {
+      // Loop back to the last slide
+      currentIndex = cards.length - visibleCards;
+      goToSlide(currentIndex);
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    const visibleCards = getVisibleCards();
+    if (currentIndex < cards.length - visibleCards) {
+      currentIndex++;
+      goToSlide(currentIndex);
+    } else {
+      // Loop back to the first slide
+      currentIndex = 0;
+      goToSlide(currentIndex);
+    }
+  });
+
+  // Touch events
+  track.addEventListener('touchstart', touchStart);
+  track.addEventListener('touchmove', touchMove);
+  track.addEventListener('touchend', touchEnd);
+
+  function touchStart(event) {
+    startPos = event.touches[0].clientX;
+    isDragging = true;
+    track.style.transition = 'none';
+  }
+
+  function touchMove(event) {
+    if (!isDragging) return;
+    const currentPosition = event.touches[0].clientX;
+    currentTranslate = prevTranslate + currentPosition - startPos;
+    setSliderPosition();
+  }
+
+  function touchEnd() {
+    isDragging = false;
+    track.style.transition = 'transform 0.5s ease-in-out';
+
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (Math.abs(movedBy) > 100) {
+      if (movedBy < 0) {
+        currentIndex = Math.min(currentIndex + 1, cards.length - getVisibleCards());
+      } else {
+        currentIndex = Math.max(currentIndex - 1, 0);
+      }
+    }
+
+    goToSlide(currentIndex);
+  }
+
+  // Window resize handling
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      goToSlide(currentIndex);
+    }, 250);
   });
 
 });
