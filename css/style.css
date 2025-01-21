@@ -1058,30 +1058,36 @@ a:focus {
   margin-top: 32px;
   color: #007bff;
   margin-bottom: 22px;
-  animation: rotateDiagonalAlternate 8s infinite linear;
+  animation: rotateScalePulse 6s infinite ease-in-out;
   transform-style: preserve-3d;
   text-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+  transition: animation-duration 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-@keyframes rotateDiagonalAlternate {
+#quotes .fa:hover {
+  color: #eedc71;
+  text-shadow: 0 0 15px rgba(246, 197, 92, 0.7);
+}
+
+@keyframes rotateScalePulse {
   0% {
-    transform: rotate3d(-1, 1, 0, 0deg);
+    transform: rotate3d(1, 1, 0, 0deg) scale(1);
   }
 
   25% {
-    transform: rotate3d(-1, 1, 0, 180deg);
+    transform: rotate3d(1, -1, 0, 90deg) scale(1.2);
   }
 
   50% {
-    transform: rotate3d(1, 1, 0, 0deg);
+    transform: rotate3d(-1, 1, 0, 180deg) scale(1);
   }
 
   75% {
-    transform: rotate3d(1, 1, 0, 180deg);
+    transform: rotate3d(-1, -1, 0, 270deg) scale(1.2);
   }
 
   100% {
-    transform: rotate3d(-1, 1, 0, 0deg);
+    transform: rotate3d(1, 1, 0, 360deg) scale(1);
   }
 }
 
