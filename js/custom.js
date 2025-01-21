@@ -148,184 +148,101 @@ $(document).ready(function () {
   });
 
   /*-------------------------------------------------------------------------------
-    Carousel Slider
+    Carousel Slider with Box-by-Box Auto-Slide
   -------------------------------------------------------------------------------*/
+  let currentCardIndex = 0;
   const track = document.querySelector('.carousel-track');
   const cards = document.querySelectorAll('.book-card');
-  const prevButton = document.querySelector('.prev-btn');
-  const nextButton = document.querySelector('.next-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  const prevBtn = document.querySelector('.prev-btn');
+  const cardsPerView = 4;
+  const totalCards = cards.length;
+
+  // Create indicators based on total cards instead of views
   const indicatorsContainer = document.querySelector('.carousel-indicators');
+  const totalSlides = Math.ceil(totalCards / cardsPerView);
 
-  let currentIndex = 0;
-  let autoScrollInterval;
-  const scrollDelay = 3000; // 3 seconds between slides
-
-  // Truncate book descriptions
-  const bookDescriptions = document.querySelectorAll('.book-info p');
-  bookDescriptions.forEach(description => {
-    const text = description.textContent;
-    if (text.length > 150) {
-      description.textContent = text.slice(0, 150) + '...';
-    }
-  });
-
-  // Calculate the number of visible cards based on viewport width
-  function getVisibleCards() {
-    const viewportWidth = window.innerWidth;
-    if (viewportWidth < 768) return 1;
-    if (viewportWidth < 1024) return 2;
-    return 3;
+  for (let i = 0; i < totalSlides; i++) {
+    const indicator = document.createElement('div');
+    indicator.classList.add('indicator');
+    if (i === 0) indicator.classList.add('active');
+    indicatorsContainer.appendChild(indicator);
   }
 
-  // Calculate maximum index based on visible cards
-  function getMaxIndex() {
-    return Math.max(0, cards.length - getVisibleCards());
-  }
+  const indicators = document.querySelectorAll('.indicator');
 
-  // Calculate card width including gap
-  function getCardWidth() {
-    const card = cards[0];
-    const cardStyle = window.getComputedStyle(card);
-    const gap = parseInt(window.getComputedStyle(track).gap) || 0;
-    const marginLeft = parseInt(cardStyle.marginLeft) || 0;
-    const marginRight = parseInt(cardStyle.marginRight) || 0;
+  function updateCarousel() {
+    // Calculate the percentage to shift based on individual card width
+    const translateX = (currentCardIndex * -(100 / cardsPerView));
+    track.style.transform = `translateX(${translateX}%)`;
 
-    // Include the card's full width plus gap and margins
-    return card.offsetWidth + gap + marginLeft + marginRight;
-  }
-
-  // Update carousel position
-  function updateCarousel(index, animate = true) {
-    currentIndex = Math.min(Math.max(index, 0), getMaxIndex());
-    const cardWidth = getCardWidth();
-
-    if (!animate) {
-      track.style.transition = 'none';
-    }
-
-    // Calculate exact position including gap
-    const position = -currentIndex * cardWidth;
-    track.style.transform = `translateX(${position}px)`;
-
-    if (!animate) {
-      track.offsetHeight; // Force reflow
-      track.style.transition = '';
-    }
-
-    updateIndicators();
-  }
-
-  // Create indicators
-  function createIndicators() {
-    indicatorsContainer.innerHTML = '';
-    const numIndicators = getMaxIndex() + 1;
-
-    for (let i = 0; i < numIndicators; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('indicator');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        updateCarousel(i);
-        resetAutoScroll();
-      });
-      indicatorsContainer.appendChild(dot);
-    }
-  }
-
-  // Update indicators
-  function updateIndicators() {
-    const indicators = document.querySelectorAll('.indicator');
+    // Update indicators
     indicators.forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === currentIndex);
+      indicator.classList.toggle('active', index === currentCardIndex);
     });
   }
 
-  // Auto scroll function
-  function startAutoScroll() {
-    autoScrollInterval = setInterval(() => {
-      if (currentIndex >= getMaxIndex()) {
-        // Smoothly return to first slide
-        currentIndex = 0;
-      } else {
-        currentIndex++;
-      }
-      updateCarousel(currentIndex);
-    }, scrollDelay);
+  function nextCard() {
+    // If at the last possible position (leaving 4 cards visible), go to first
+    if (currentCardIndex >= totalCards - cardsPerView) {
+      currentCardIndex = 0;
+    } else {
+      currentCardIndex++;
+    }
+    updateCarousel();
   }
 
-  // Reset auto scroll
-  function resetAutoScroll() {
-    clearInterval(autoScrollInterval);
-    startAutoScroll();
+  function prevCard() {
+    // If at the beginning, go to last possible position
+    if (currentCardIndex <= 0) {
+      currentCardIndex = totalCards - cardsPerView;
+    } else {
+      currentCardIndex--;
+    }
+    updateCarousel();
   }
 
-  // Event listeners
-  prevButton.addEventListener('click', () => {
-    if (currentIndex === 0) {
-      updateCarousel(getMaxIndex());
-    } else {
-      updateCarousel(currentIndex - 1);
+  // Auto-slide functionality
+  let autoSlideInterval;
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlideInterval = setInterval(nextCard, 3000); // Slides every 3 seconds
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
     }
-    resetAutoScroll();
+  }
+
+  // Start auto-sliding when the page loads
+  startAutoSlide();
+
+  // Event Listeners
+  nextBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    nextCard();
+    startAutoSlide();
   });
 
-  nextButton.addEventListener('click', () => {
-    if (currentIndex === getMaxIndex()) {
-      updateCarousel(0);
-    } else {
-      updateCarousel(currentIndex + 1);
-    }
-    resetAutoScroll();
+  prevBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevCard();
+    startAutoSlide();
   });
 
-  // Handle window resize
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      // Adjust current index if necessary
-      const maxIndex = getMaxIndex();
-      if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-      }
-      createIndicators();
-      updateCarousel(currentIndex, false);
-    }, 250);
-  });
-
-  // Initialize carousel
-  function initCarousel() {
-    // Set initial position
-    updateCarousel(0, false);
-
-    // Create indicators
-    createIndicators();
-
-    // Start auto-scroll with proper timing
-    startAutoScroll();
-
-    // Add resize observer to handle container width changes
-    const resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          const maxIndex = getMaxIndex();
-          if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
-          }
-          updateCarousel(currentIndex, false);
-          createIndicators();
-        }, 250);
-      }
+  // Add indicator click functionality
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      stopAutoSlide();
+      currentCardIndex = index;
+      updateCarousel();
+      startAutoSlide();
     });
+  });
 
-    resizeObserver.observe(track.parentElement);
-  }
-
-  // Pause auto-scroll on hover
-  track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-  track.addEventListener('mouseleave', startAutoScroll);
-
-  // Initialize on load
-  initCarousel();
+  // Pause auto-sliding when hovering over the carousel
+  track.addEventListener('mouseenter', stopAutoSlide);
+  track.addEventListener('mouseleave', startAutoSlide);
 });

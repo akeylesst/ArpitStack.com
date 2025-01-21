@@ -1259,23 +1259,20 @@ a:focus {
 
 #books {
   background: #2c3e50;
-  padding: 58px 0;
-  position: relative;
   text-align: center;
+  padding: 60px 20px;
 }
 
 #books .section-title {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   text-align: center;
-  padding: 0 20px;
 }
 
 .books-carousel-container {
   position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 80px;
   width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
   box-sizing: border-box;
 }
 
@@ -1288,24 +1285,22 @@ a:focus {
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  gap: 35px;
+  gap: 20px;
   padding: 20px 0;
-  width: 100%;
-  margin-left: 11px;
+  will-change: transform;
 }
 
 .book-card {
-  flex: 0 0 calc(33.333% - 20px);
+  flex: 0 0 calc(25% - 15px);
+  /* Changed to match project section's 4-column layout */
   background: rgba(255, 255, 255, 0.048);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  padding: 25px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  width: 100%;
-  box-sizing: border-box;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
+  min-height: 350px;
 }
 
 .book-card:hover {
@@ -1325,7 +1320,6 @@ a:focus {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .book-info {
@@ -1344,36 +1338,51 @@ a:focus {
 }
 
 .book-info h4 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #bdc3c7;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.book-rating {
+  margin: 10px 0;
+}
+
+.book-rating .fa-star {
+  color: #edd654;
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.book-rating .fa-star-half-o {
+  color: #edd654;
+  font-size: 16px;
+  margin: 0 2px;
 }
 
 .book-info p {
-  font-size: 1.35rem;
+  font-size: 14px;
   color: #b4c3c4;
-  margin-bottom: 25px;
-  line-height: 1.6;
+  margin-bottom: 15px;
   flex: 1;
 }
 
 .btn-book {
-  display: inline-block;
-  padding: 12px 30px;
   background: #e74c3c;
-  color: white;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-size: 1.4rem;
   border: 2px solid #e74c3c;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
   margin-top: auto;
 }
 
 .btn-book:hover {
   background: #fa6a5a;
   border-color: #e74c3c;
-  color: #ffff;
+  color: #ffffff;
 }
 
 /* Navigation Buttons */
@@ -1384,7 +1393,7 @@ a:focus {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(30, 225, 121, 0.5);
   border: none;
   color: white;
   cursor: pointer;
@@ -1392,21 +1401,20 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 25px;
   transition: all 0.3s ease;
 }
 
 .prev-btn {
-  left: 40px;
+  left: 0;
 }
 
 .next-btn {
-  right: 40px;
+  right: 0;
 }
 
 .carousel-nav:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-50%) scale(1.1);
+  background: rgba(17, 184, 95, 0.5);
 }
 
 /* Indicators */
@@ -1415,7 +1423,7 @@ a:focus {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 30px;
+  margin-top: 25px;
   padding: 20px 0;
 }
 
@@ -1433,130 +1441,48 @@ a:focus {
   transform: scale(1.2);
 }
 
-/* Responsive Design */
-@media (min-width: 1441px) {
+@media only screen and (max-width: 1024px) {
   .book-card {
-    flex: 0 0 calc(33.333% - 30px);
-    max-width: 380px;
+    flex: 0 0 calc(33.333% - 13.333px);
+    min-height: auto;
   }
 }
 
-@media (max-width: 1440px) {
-  .book-card {
-    flex: 0 0 calc(33.333% - 30px);
-    max-width: 350px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .books-carousel-container {
-    padding: 0 60px;
-  }
-
-  .book-card {
-    flex: 0 0 calc(50% - 15px);
-    width: calc(50% - 15px);
-  }
-}
-
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .books-carousel-container {
     padding: 0 40px;
   }
 
   .book-card {
-    flex: 0 0 100%;
-    width: 100%;
-    margin: 0;
+    flex: 0 0 calc(50% - 10px);
+    padding: 15px;
+    min-height: 250px;
   }
 
-  .book-cover {
-    height: 280px;
-  }
-
-  .carousel-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-
-  .carousel-track {
-    gap: 20px;
-  }
-
-  .prev-btn {
-    left: 10px;
-  }
-
-  .next-btn {
-    right: 10px;
+  .btn-book {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 }
 
-@media (max-width: 480px) {
+@media only screen and (max-width: 480px) {
+  #books {
+    padding: 40px 10px;
+  }
+
   .books-carousel-container {
     padding: 0 30px;
   }
 
   .book-card {
-    padding: 15px;
-  }
-
-  .book-cover {
-    height: 200px;
-  }
-
-  .book-info h3 {
-    font-size: 1.5rem;
-  }
-
-  .book-info p {
-    font-size: 1.15rem;
-  }
-}
-
-@media (max-width: 375px) {
-  .books-carousel-container {
-    padding: 0 25px;
-  }
-
-  .book-card {
-    min-width: 220px;
-    max-width: 280px;
-  }
-
-  .book-cover {
-    height: 220px;
-  }
-}
-
-@media (max-width: 320px) {
-  .books-carousel-container {
-    padding: 0 20px;
-  }
-
-  .book-card {
-    padding: 12px;
-  }
-
-  .book-cover {
-    height: 180px;
-  }
-
-  .book-info h3 {
-    font-size: 1.35rem;
-  }
-
-  .book-info h4 {
-    font-size: 1.1rem;
-  }
-
-  .book-info p {
-    font-size: 1.1rem;
+    flex: 0 0 100%;
+    padding: 10px;
+    min-height: 220px;
   }
 
   .btn-book {
-    padding: 10px 20px;
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 
