@@ -125,25 +125,35 @@ $(document).ready(function () {
   const nightModeToggles = document.querySelectorAll('.navbar-night-mode, .night-mode-toggle');
   const toggleSound = document.getElementById('toggle-sound');
 
+  function toggleNightMode() {
+    document.body.classList.toggle('dark-theme');
+
+    const icons = document.querySelectorAll('.fa-moon-o, .fa-sun-o');
+    icons.forEach(icon => {
+      if (icon.classList.contains('fa-moon-o')) {
+        icon.classList.replace('fa-moon-o', 'fa-sun-o');
+      } else {
+        icon.classList.replace('fa-sun-o', 'fa-moon-o');
+      }
+    });
+
+    if (toggleSound) {
+      toggleSound.currentTime = 0;
+      toggleSound.play();
+    }
+  }
+
+  const currentHour = new Date().getHours();
+  if (currentHour >= 20 || currentHour < 7) {
+    document.body.classList.add('dark-theme');
+    const icon = document.querySelector('.fa-moon-o');
+    if (icon) icon.classList.replace('fa-moon-o', 'fa-sun-o');
+  }
+
   nightModeToggles.forEach(toggle => {
     toggle.addEventListener('click', function (e) {
       e.preventDefault();
-
-      if (toggleSound) {
-        toggleSound.currentTime = 0;
-        toggleSound.play();
-      }
-
-      document.body.classList.toggle('dark-theme');
-
-      const icons = document.querySelectorAll('.fa-moon-o, .fa-sun-o');
-      icons.forEach(icon => {
-        if (icon.classList.contains('fa-moon-o')) {
-          icon.classList.replace('fa-moon-o', 'fa-sun-o');
-        } else {
-          icon.classList.replace('fa-sun-o', 'fa-moon-o');
-        }
-      });
+      toggleNightMode();
     });
   });
 
@@ -158,7 +168,6 @@ $(document).ready(function () {
   let cardsPerView = getCardsPerView(); // Dynamic cards per view
   const totalCards = cards.length;
 
-  // Function to determine cards per view based on screen width
   function getCardsPerView() {
     const width = window.innerWidth;
     if (width <= 480) return 1;
@@ -167,16 +176,13 @@ $(document).ready(function () {
     return 4;
   }
 
-  // Function to update indicators based on screen size
   function updateIndicators() {
     const indicatorsContainer = document.querySelector('.carousel-indicators');
     const currentCardsPerView = getCardsPerView();
     const totalSlides = Math.ceil(totalCards / currentCardsPerView);
 
-    // Clear existing indicators
     indicatorsContainer.innerHTML = '';
 
-    // Create new indicators
     for (let i = 0; i < totalSlides; i++) {
       const indicator = document.createElement('div');
       indicator.classList.add('indicator');
@@ -185,7 +191,6 @@ $(document).ready(function () {
       }
       indicatorsContainer.appendChild(indicator);
 
-      // Add click event listener
       indicator.addEventListener('click', () => {
         stopAutoSlide();
         currentCardIndex = i * currentCardsPerView;
@@ -201,11 +206,9 @@ $(document).ready(function () {
     const cardElement = document.querySelector('.book-card');
     const cardWidth = cardElement.offsetWidth;
 
-    // Get the gap size in pixels (from .carousel-track's computed style)
     const trackStyle = window.getComputedStyle(track);
     const cardGap = parseFloat(trackStyle.gap);
 
-    // Calculate total card width including gap
     const cardTotalWidth = cardWidth + cardGap;
 
     const maxIndex = totalCards - currentCardsPerView;
@@ -242,7 +245,6 @@ $(document).ready(function () {
     updateCarousel();
   }
 
-  // Auto-slide functionality
   let autoSlideInterval;
 
   function startAutoSlide() {
@@ -256,7 +258,6 @@ $(document).ready(function () {
     }
   }
 
-  // Event Listeners
   nextBtn.addEventListener('click', () => {
     stopAutoSlide();
     nextCard();
@@ -269,7 +270,6 @@ $(document).ready(function () {
     startAutoSlide();
   });
 
-  // Handle window resize
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -283,11 +283,9 @@ $(document).ready(function () {
     }, 250);
   });
 
-  // Initialize carousel
   updateIndicators();
   startAutoSlide();
 
-  // Pause auto-sliding when hovering over the carousel
   track.addEventListener('mouseenter', stopAutoSlide);
   track.addEventListener('mouseleave', startAutoSlide);
 });
