@@ -2100,13 +2100,12 @@ body.dark-theme .btn-book:hover {
 }
 
 body.dark-theme .carousel-nav {
-  background: rgba(255, 255, 255, 0.1);
+  background: #03dac6;
   color: #e0e0e0;
 }
 
 body.dark-theme .carousel-nav:hover {
-  background: rgba(255, 255, 255, 0.3);
-  color: #bb86fc;
+  background: #08a595;
 }
 
 body.dark-theme .carousel-indicators .indicator {
