@@ -197,25 +197,30 @@ $(document).ready(function () {
 
   function updateCarousel() {
     const currentCardsPerView = getCardsPerView();
-    // Calculate card width including gap
-    const cardWidth = 100 / currentCardsPerView;
+    const track = document.querySelector('.carousel-track');
+    const cardElement = document.querySelector('.book-card');
+    const cardWidth = cardElement.offsetWidth;
 
-    // Ensure currentCardIndex doesn't exceed maximum possible position
+    // Get the gap size in pixels (from .carousel-track's computed style)
+    const trackStyle = window.getComputedStyle(track);
+    const cardGap = parseFloat(trackStyle.gap);
+
+    // Calculate total card width including gap
+    const cardTotalWidth = cardWidth + cardGap;
+
     const maxIndex = totalCards - currentCardsPerView;
     if (currentCardIndex > maxIndex) {
       currentCardIndex = maxIndex;
     }
 
-    // Calculate precise translation percentage
-    const translateX = -(currentCardIndex * cardWidth);
-    track.style.transform = `translateX(${translateX}%)`;
-
-    // Update indicators
+    const translateX = -(currentCardIndex * cardTotalWidth);
+    track.style.transform = `translateX(${translateX}px)`;
     const currentIndicatorIndex = Math.floor(currentCardIndex / currentCardsPerView);
     document.querySelectorAll('.indicator').forEach((indicator, index) => {
       indicator.classList.toggle('active', index === currentIndicatorIndex);
     });
   }
+
 
   function nextCard() {
     const currentCardsPerView = getCardsPerView();
