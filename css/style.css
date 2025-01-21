@@ -1097,7 +1097,6 @@ a:focus {
 #blog {
   background: #23ae6b;
   padding: 4rem 2rem;
-  min-height: 100vh;
 }
 
 .blog-thumb {
@@ -1274,6 +1273,7 @@ a:focus {
   margin: 0 auto;
   padding: 0 60px;
   box-sizing: border-box;
+  max-width: 1400px;
 }
 
 .books-carousel {
@@ -1498,7 +1498,7 @@ a:focus {
 #contact .contact-thumb,
 #contact .sponsor-thumb {
   padding: 22px 32px;
-  min-height: 75vh;
+  min-height: 36vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
