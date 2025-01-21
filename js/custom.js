@@ -148,43 +148,78 @@ $(document).ready(function () {
   });
 
   /*-------------------------------------------------------------------------------
-    Carousel Slider with Box-by-Box Auto-Slide
+    Carousel Slider with Responsive Box-by-Box Auto-Slide
   -------------------------------------------------------------------------------*/
   let currentCardIndex = 0;
   const track = document.querySelector('.carousel-track');
   const cards = document.querySelectorAll('.book-card');
   const nextBtn = document.querySelector('.next-btn');
   const prevBtn = document.querySelector('.prev-btn');
-  const cardsPerView = 4;
+  let cardsPerView = getCardsPerView(); // Dynamic cards per view
   const totalCards = cards.length;
 
-  // Create indicators based on total cards instead of views
-  const indicatorsContainer = document.querySelector('.carousel-indicators');
-  const totalSlides = Math.ceil(totalCards / cardsPerView);
-
-  for (let i = 0; i < totalSlides; i++) {
-    const indicator = document.createElement('div');
-    indicator.classList.add('indicator');
-    if (i === 0) indicator.classList.add('active');
-    indicatorsContainer.appendChild(indicator);
+  // Function to determine cards per view based on screen width
+  function getCardsPerView() {
+    const width = window.innerWidth;
+    if (width <= 480) return 1;
+    if (width <= 768) return 2;
+    if (width <= 1024) return 3;
+    return 4;
   }
 
-  const indicators = document.querySelectorAll('.indicator');
+  // Function to update indicators based on screen size
+  function updateIndicators() {
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+    const currentCardsPerView = getCardsPerView();
+    const totalSlides = Math.ceil(totalCards / currentCardsPerView);
+
+    // Clear existing indicators
+    indicatorsContainer.innerHTML = '';
+
+    // Create new indicators
+    for (let i = 0; i < totalSlides; i++) {
+      const indicator = document.createElement('div');
+      indicator.classList.add('indicator');
+      if (i === Math.floor(currentCardIndex / currentCardsPerView)) {
+        indicator.classList.add('active');
+      }
+      indicatorsContainer.appendChild(indicator);
+
+      // Add click event listener
+      indicator.addEventListener('click', () => {
+        stopAutoSlide();
+        currentCardIndex = i * currentCardsPerView;
+        updateCarousel();
+        startAutoSlide();
+      });
+    }
+  }
 
   function updateCarousel() {
-    // Calculate the percentage to shift based on individual card width
-    const translateX = (currentCardIndex * -(100 / cardsPerView));
+    const currentCardsPerView = getCardsPerView();
+    // Calculate card width including gap
+    const cardWidth = 100 / currentCardsPerView;
+
+    // Ensure currentCardIndex doesn't exceed maximum possible position
+    const maxIndex = totalCards - currentCardsPerView;
+    if (currentCardIndex > maxIndex) {
+      currentCardIndex = maxIndex;
+    }
+
+    // Calculate precise translation percentage
+    const translateX = -(currentCardIndex * cardWidth);
     track.style.transform = `translateX(${translateX}%)`;
 
     // Update indicators
-    indicators.forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === currentCardIndex);
+    const currentIndicatorIndex = Math.floor(currentCardIndex / currentCardsPerView);
+    document.querySelectorAll('.indicator').forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentIndicatorIndex);
     });
   }
 
   function nextCard() {
-    // If at the last possible position (leaving 4 cards visible), go to first
-    if (currentCardIndex >= totalCards - cardsPerView) {
+    const currentCardsPerView = getCardsPerView();
+    if (currentCardIndex >= totalCards - currentCardsPerView) {
       currentCardIndex = 0;
     } else {
       currentCardIndex++;
@@ -193,9 +228,9 @@ $(document).ready(function () {
   }
 
   function prevCard() {
-    // If at the beginning, go to last possible position
+    const currentCardsPerView = getCardsPerView();
     if (currentCardIndex <= 0) {
-      currentCardIndex = totalCards - cardsPerView;
+      currentCardIndex = totalCards - currentCardsPerView;
     } else {
       currentCardIndex--;
     }
@@ -207,7 +242,7 @@ $(document).ready(function () {
 
   function startAutoSlide() {
     stopAutoSlide();
-    autoSlideInterval = setInterval(nextCard, 3000); // Slides every 3 seconds
+    autoSlideInterval = setInterval(nextCard, 3000);
   }
 
   function stopAutoSlide() {
@@ -215,9 +250,6 @@ $(document).ready(function () {
       clearInterval(autoSlideInterval);
     }
   }
-
-  // Start auto-sliding when the page loads
-  startAutoSlide();
 
   // Event Listeners
   nextBtn.addEventListener('click', () => {
@@ -232,15 +264,23 @@ $(document).ready(function () {
     startAutoSlide();
   });
 
-  // Add indicator click functionality
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      stopAutoSlide();
-      currentCardIndex = index;
-      updateCarousel();
-      startAutoSlide();
-    });
+  // Handle window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newCardsPerView = getCardsPerView();
+      if (cardsPerView !== newCardsPerView) {
+        cardsPerView = newCardsPerView;
+        updateIndicators();
+        updateCarousel();
+      }
+    }, 250);
   });
+
+  // Initialize carousel
+  updateIndicators();
+  startAutoSlide();
 
   // Pause auto-sliding when hovering over the carousel
   track.addEventListener('mouseenter', stopAutoSlide);

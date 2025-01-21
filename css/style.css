@@ -1285,14 +1285,13 @@ a:focus {
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  gap: 20px;
+  gap: 18px;
   padding: 20px 0;
   will-change: transform;
 }
 
 .book-card {
   flex: 0 0 calc(25% - 15px);
-  /* Changed to match project section's 4-column layout */
   background: rgba(255, 255, 255, 0.048);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -1471,7 +1470,7 @@ a:focus {
   }
 
   .books-carousel-container {
-    padding: 0 30px;
+    padding: 0 10px;
   }
 
   .book-card {
